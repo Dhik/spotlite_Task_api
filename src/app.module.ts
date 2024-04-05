@@ -10,6 +10,10 @@ import { Book } from './book/entities/book.entity';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { PrismaService } from './prisma.service';
+import { OrderModule } from './order/order.module';
+import { BuyModule } from './buy/buy.module';
+import { Order } from './order/entities/order.entity';
+import { Buy } from './buy/entities/buy.entity';
 
 
 @Module({
@@ -22,11 +26,11 @@ import { PrismaService } from './prisma.service';
       username: configService.get('DATABASE_USER'),
       password: configService.get('DATABASE_PASSWORD'),
       database: configService.get('DATABASE_NAME'),
-      entities: [Todo, Book],
+      entities: [Todo, Book, Order, Buy],
       synchronize: true,
     }),
     inject: [ConfigService]
-  }), TodoModule, BookModule, ConfigModule.forRoot({ envFilePath: ['.env'] }), BookModule, UserModule, AuthModule],
+  }), TodoModule, BookModule, ConfigModule.forRoot({ envFilePath: ['.env'] }), BookModule, UserModule, AuthModule, OrderModule, BuyModule],
   controllers: [AppController],
   providers: [AppService, PrismaService],
 })
